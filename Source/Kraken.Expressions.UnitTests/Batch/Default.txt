@@ -1,0 +1,342 @@
+; integer constants
+int;10;10
+int;-13;-13
+
+; decimal constants
+decimal;10.9;10.9m
+decimal;13.7;13.7m
+decimal;19;19m
+decimal;-19;-19m
+decimal;.42;.42m
+decimal;-.28;-.28m
+
+; float constants
+float;10.2;10.2f
+float;-13.6;-13.6f
+float;12;12f
+float;-16;-16f
+float;.42;.42f
+float;-.28;-.28f
+
+; double constants
+double;2.4;2.4
+double;-19.7;-19.7
+double;.42;.42
+double;-.28;-.28
+
+; boolean constants
+bool;true;true
+bool;true;True
+bool;false;false
+bool;false;False
+
+; string constants
+string;test string;"test string"
+string;ìšèøžýáíé;"ìšèøžýáíé"
+string;1 + 2;"1 + 2"
+
+; date constants
+DateTime;2015-12-31;#2015/31/12#
+DateTime;2012-02-29;#2012/29/02#
+DateTime;2012-02-29;#2012/29/2#
+DateTime;2015-12-31;#15/31/12#
+DateTime;2012-02-29;#12/29/02#
+DateTime;2012-02-29;#12/29/2#
+
+DateTime;2015-12-31 14:21:00;#2015/31/12 14:21#
+DateTime;2015-12-31 14:21:43;#2015/31/12 14:21:43#
+DateTime;2015-12-31 01:02;#2015/31/12 1:2#
+DateTime;2015-12-31 01:02:03;#2015/31/12 1:2:3#
+DateTime;2012-02-29 14:21:00;#2012/29/02 14:21#
+DateTime;2012-02-29 14:21:43;#2012/29/02 14:21:43#
+DateTime;2012-02-29 01:02:00;#2012/29/02 1:2#
+DateTime;2012-02-29 01:02:03;#2012/29/02 1:2:3#
+DateTime;2012-02-29 14:21:00;#2012/29/2 14:21#
+DateTime;2012-02-29 14:21:43;#2012/29/2 14:21:43#
+DateTime;2012-02-29 01:02:00;#2012/29/2 1:2#
+DateTime;2012-02-29 01:02:03;#2012/29/2 1:2:3#
+DateTime;2015-12-31 14:21:00;#15/31/12 14:21#
+DateTime;2015-12-31 14:21:43;#15/31/12 14:21:43#
+DateTime;2015-12-31 01:02:00;#15/31/12 1:2#
+DateTime;2015-12-31 01:02:03;#15/31/12 1:2:3#
+DateTime;2012-02-29 14:21:00;#12/29/02 14:21#
+DateTime;2012-02-29 14:21:43;#12/29/02 14:21:43#
+DateTime;2012-02-29 01:02:00;#12/29/02 1:2#
+DateTime;2012-02-29 01:02:03;#12/29/02 1:2:3#
+DateTime;2012-02-29 14:21:00;#12/29/2 14:21#
+DateTime;2012-02-29 14:21:43;#12/29/2 14:21:43#
+DateTime;2012-02-29 01:02:00;#12/29/2 1:2#
+DateTime;2012-02-29 01:02:03;#12/29/2 1:2:3#
+
+int;31;#2015/31/12#.Day
+int;12;#2015/31/12#.Month
+int;2015;#2015/31/12#.Year
+int;60;#2012/29/02#.DayOfYear
+int;60;#2012/29/2#.DayOfYear
+DayOfWeek;3;#2012/29/02#.DayOfWeek
+DayOfWeek;3;#2012/29/2#.DayOfWeek
+int;14;#2012/29/2 14:21#.Hour
+int;14;#2012/29/2 14:21:43#.Hour
+int;21;#2012/29/2 14:21#.Minute
+int;21;#2012/29/2 14:21:43#.Minute
+int;0;#2012/29/2 14:21#.Second
+int;43;#2012/29/2 14:21:43#.Second
+
+int;31;#15/31/12#.Day
+int;12;#15/31/12#.Month
+int;2015;#15/31/12#.Year
+int;60;#12/29/02#.DayOfYear
+int;60;#12/29/2#.DayOfYear
+DayOfWeek;3;#12/29/02#.DayOfWeek
+DayOfWeek;3;#12/29/2#.DayOfWeek
+int;14;#12/29/2 14:21#.Hour
+int;14;#12/29/2 14:21:43#.Hour
+int;21;#12/29/2 14:21#.Minute
+int;21;#12/29/2 14:21:43#.Minute
+int;0;#12/29/2 14:21#.Second
+int;43;#12/29/2 14:21:43#.Second
+
+DateTime;2015-12-31;#2015-12-31#
+DateTime;2012-02-29;#2012-02-29#
+DateTime;2012-02-29;#2012-2-29#
+DateTime;2015-12-31;#15-12-31#
+DateTime;2012-02-29;#12-02-29#
+DateTime;2012-02-29;#12-2-29#
+
+DateTime;2015-12-31 14:21:00;#2015-12-31 14:21#
+DateTime;2015-12-31 14:21:43;#2015-12-31 14:21:43#
+DateTime;2015-12-31 01:02;#2015-12-31 1:2#
+DateTime;2015-12-31 01:02:03;#2015-12-31 1:2:3#
+DateTime;2012-02-29 14:21:00;#2012-02-29 14:21#
+DateTime;2012-02-29 14:21:43;#2012-02-29 14:21:43#
+DateTime;2012-02-29 01:02:00;#2012-02-29 1:2#
+DateTime;2012-02-29 01:02:03;#2012-02-29 1:2:3#
+DateTime;2012-02-29 14:21:00;#2012-2-29 14:21#
+DateTime;2012-02-29 14:21:43;#2012-2-29 14:21:43#
+DateTime;2012-02-29 01:02:00;#2012-2-29 1:2#
+DateTime;2012-02-29 01:02:03;#2012-2-29 1:2:3#
+DateTime;2015-12-31 14:21:00;#15-12-31 14:21#
+DateTime;2015-12-31 14:21:43;#15-12-31 14:21:43#
+DateTime;2015-12-31 01:02:00;#15-12-31 1:2#
+DateTime;2015-12-31 01:02:03;#15-12-31 1:2:3#
+DateTime;2012-02-29 14:21:00;#12-02-29 14:21#
+DateTime;2012-02-29 14:21:43;#12-02-29 14:21:43#
+DateTime;2012-02-29 01:02:00;#12-02-29 1:2#
+DateTime;2012-02-29 01:02:03;#12-02-29 1:2:3#
+DateTime;2012-02-29 14:21:00;#12-2-29 14:21#
+DateTime;2012-02-29 14:21:43;#12-2-29 14:21:43#
+DateTime;2012-02-29 01:02:00;#12-2-29 1:2#
+DateTime;2012-02-29 01:02:03;#12-2-29 1:2:3#
+
+int;31;#2015-12-31#.Day
+int;12;#2015-12-31#.Month
+int;2015;#2015-12-31#.Year
+int;60;#2012-02-29#.DayOfYear
+int;60;#2012-2-29#.DayOfYear
+DayOfWeek;3;#2012-02-29#.DayOfWeek
+DayOfWeek;3;#2012-2-29#.DayOfWeek
+int;14;#2012-2-29 14:21#.Hour
+int;14;#2012-2-29 14:21:43#.Hour
+int;21;#2012-2-29 14:21#.Minute
+int;21;#2012-2-29 14:21:43#.Minute
+int;0;#2012-2-29 14:21#.Second
+int;43;#2012-2-29 14:21:43#.Second
+
+int;31;#15-12-31#.Day
+int;12;#15-12-31#.Month
+int;2015;#15-12-31#.Year
+int;60;#12-02-29#.DayOfYear
+int;60;#12-2-29#.DayOfYear
+DayOfWeek;3;#12-02-29#.DayOfWeek
+DayOfWeek;3;#12-2-29#.DayOfWeek
+int;14;#12-2-29 14:21#.Hour
+int;14;#12-2-29 14:21:43#.Hour
+int;21;#12-2-29 14:21#.Minute
+int;21;#12-2-29 14:21:43#.Minute
+int;0;#12-2-29 14:21#.Second
+int;43;#12-2-29 14:21:43#.Second
+
+DateTime;2015-12-31;#31.12.2015#
+DateTime;2012-02-29;#29.02.2012#
+DateTime;2012-02-29;#29.2.2012#
+DateTime;2015-12-31;#31.12.15#
+DateTime;2012-02-29;#29.02.12#
+DateTime;2012-02-29;#29.2.12#
+
+DateTime;2015-12-31 14:21:00;#31.12.2015 14:21#
+DateTime;2015-12-31 14:21:43;#31.12.2015 14:21:43#
+DateTime;2015-12-31 01:02;#31.12.2015 1:2#
+DateTime;2015-12-31 01:02:03;#31.12.2015 1:2:3#
+DateTime;2012-02-29 14:21:00;#29.02.2012 14:21#
+DateTime;2012-02-29 14:21:43;#29.02.2012 14:21:43#
+DateTime;2012-02-29 01:02:00;#29.02.2012 1:2#
+DateTime;2012-02-29 01:02:03;#29.02.2012 1:2:3#
+DateTime;2012-02-29 14:21:00;#29.2.2012 14:21#
+DateTime;2012-02-29 14:21:43;#29.2.2012 14:21:43#
+DateTime;2012-02-29 01:02:00;#29.2.2012 1:2#
+DateTime;2012-02-29 01:02:03;#29.2.2012 1:2:3#
+DateTime;2015-12-31 14:21:00;#31.12.15 14:21#
+DateTime;2015-12-31 14:21:43;#31.12.15 14:21:43#
+DateTime;2015-12-31 01:02:00;#31.12.15 1:2#
+DateTime;2015-12-31 01:02:03;#31.12.15 1:2:3#
+DateTime;2012-02-29 14:21:00;#29.02.12 14:21#
+DateTime;2012-02-29 14:21:43;#29.02.12 14:21:43#
+DateTime;2012-02-29 01:02:00;#29.02.12 1:2#
+DateTime;2012-02-29 01:02:03;#29.02.12 1:2:3#
+DateTime;2012-02-29 14:21:00;#29.2.12 14:21#
+DateTime;2012-02-29 14:21:43;#29.2.12 14:21:43#
+DateTime;2012-02-29 01:02:00;#29.2.12 1:2#
+DateTime;2012-02-29 01:02:03;#29.2.12 1:2:3#
+
+int;31;#31.12.2015#.Day
+int;12;#31.12.2015#.Month
+int;2015;#31.12.2015#.Year
+int;60;#29.02.2012#.DayOfYear
+int;60;#29.2.2012#.DayOfYear
+DayOfWeek;3;#29.02.2012#.DayOfWeek
+DayOfWeek;3;#29.2.2012#.DayOfWeek
+int;14;#29.2.2012 14:21#.Hour
+int;14;#29.2.2012 14:21:43#.Hour
+int;21;#29.2.2012 14:21#.Minute
+int;21;#29.2.2012 14:21:43#.Minute
+int;0;#29.2.2012 14:21#.Second
+int;43;#29.2.2012 14:21:43#.Second
+
+int;31;#31.12.15#.Day
+int;12;#31.12.15#.Month
+int;2015;#31.12.15#.Year
+int;60;#29.02.12#.DayOfYear
+int;60;#29.2.12#.DayOfYear
+DayOfWeek;3;#29.02.12#.DayOfWeek
+DayOfWeek;3;#29.2.12#.DayOfWeek
+int;14;#29.2.12 14:21#.Hour
+int;14;#29.2.12 14:21:43#.Hour
+int;21;#29.2.12 14:21#.Minute
+int;21;#29.2.12 14:21:43#.Minute
+int;0;#29.2.12 14:21#.Second
+int;43;#29.2.12 14:21:43#.Second
+
+; simple conditions
+bool;true;1 == 1
+bool;false;1 == 2
+bool;false;1 != 1
+bool;true;1 != 2
+bool;false;1 <> 1
+bool;true;1 <> 2
+
+; simple unary operators
+bool;true;!false
+bool;false;!true
+
+; simple binary operators
+int;18;6 + 12
+int;22;65 - 43
+int;475;25 * 19
+int;16;65 / 4
+decimal;16.25;65m / 4
+
+; type - static members
+sbyte;-128;sbyte.MinValue
+sbyte;127;sbyte.MaxValue
+short;-32768;short.MinValue
+short;32767;short.MaxValue
+short;-32768;Int16.MinValue
+short;32767;Int16.MaxValue
+int;-2147483648;int.MinValue
+int;2147483647;int.MaxValue
+int;-2147483648;Int32.MinValue
+int;2147483647;Int32.MaxValue
+long;-9223372036854775808;long.MinValue
+long;9223372036854775807;long.MaxValue
+long;-9223372036854775808;Int64.MinValue
+long;9223372036854775807;Int64.MaxValue
+byte;0;byte.MinValue
+byte;255;byte.MaxValue
+ushort;0;ushort.MinValue
+ushort;65535;ushort.MaxValue
+ushort;0;UInt16.MinValue
+ushort;65535;UInt16.MaxValue
+uint;0;uint.MinValue
+uint;4294967295;uint.MaxValue
+uint;0;UInt32.MinValue
+uint;4294967295;UInt32.MaxValue
+ulong;0;ulong.MinValue
+ulong;18446744073709551615;ulong.MaxValue
+ulong;0;UInt64.MinValue
+ulong;18446744073709551615;UInt64.MaxValue
+
+; expressions
+int;-44;12 - 7 * 8
+int;54;14 + (12 - 7) * 8
+int;54;8 * (12 - 7) + 14
+int;14;2 + 3 * 4
+int;14;3 * 4 + 2
+int;20;(2 + 3) * 4
+int;20;4 * (2 + 3)
+int;6;(1 + 2 + 3)
+int;DivideByZeroException;1 / 0
+int;4;(((3)) + ((((2))) + (-1)))
+int;4;(((3)) + (-1) + (((2))))
+int;2;5 + -1 + -2
+double;.25;.025 * 10
+
+; invalid binary operation on byte types
+sbyte;InvalidOperationException;sbyte.MinValue - 1
+sbyte;InvalidOperationException;sbyte.MaxValue + 1
+byte;InvalidOperationException;byte.MinValue - 1
+byte;InvalidOperationException;byte.MaxValue + 1
+
+; overflow
+short;32767;short.MinValue - 1
+short;-32768;short.MaxValue + 1
+short;32767;Int16.MinValue - 1
+short;-32768;Int16.MaxValue + 1
+int;2147483647;int.MinValue - 1
+int;-2147483648;int.MaxValue + 1
+int;2147483647;Int32.MinValue - 1
+int;-2147483648;Int32.MaxValue + 1
+long;9223372036854775807;long.MinValue - 1
+long;-9223372036854775808;long.MaxValue + 1
+long;9223372036854775807;Int64.MinValue - 1
+long;-9223372036854775808;Int64.MaxValue + 1
+ushort;65535;ushort.MinValue - 1
+ushort;0;ushort.MaxValue + 1
+ushort;65535;UInt16.MinValue - 1
+ushort;0;UInt16.MaxValue + 1
+uint;4294967295;uint.MinValue - 1
+uint;0;uint.MaxValue + 1
+uint;4294967295;UInt32.MinValue - 1
+uint;0;UInt32.MaxValue + 1
+ulong;18446744073709551615;ulong.MinValue - 1
+ulong;0;ulong.MaxValue + 1
+ulong;18446744073709551615;UInt64.MinValue - 1
+ulong;0;UInt64.MaxValue + 1
+
+;short;OverflowException;short.MinValue - 1
+;short;OverflowException;short.MaxValue + 1
+;short;OverflowException;Int16.MinValue - 1
+;short;OverflowException;Int16.MaxValue + 1
+;int;OverflowException;int.MinValue - 1
+;int;OverflowException;int.MaxValue + 1
+;int;OverflowException;Int32.MinValue - 1
+;int;OverflowException;Int32.MaxValue + 1
+;long;OverflowException;long.MinValue - 1
+;long;OverflowException;long.MaxValue + 1
+;long;OverflowException;Int64.MinValue - 1
+;long;OverflowException;Int64.MaxValue + 1
+;ushort;OverflowException;ushort.MinValue - 1
+;ushort;OverflowException;ushort.MaxValue + 1
+;ushort;OverflowException;UInt16.MinValue - 1
+;ushort;OverflowException;UInt16.MaxValue + 1
+;uint;OverflowException;uint.MinValue - 1
+;uint;OverflowException;uint.MaxValue + 1
+;uint;OverflowException;UInt32.MinValue - 1
+;uint;OverflowException;UInt32.MaxValue + 1
+;ulong;OverflowException;ulong.MinValue - 1
+;ulong;OverflowException;ulong.MaxValue + 1
+;ulong;OverflowException;UInt64.MinValue - 1
+;ulong;OverflowException;UInt64.MaxValue + 1
+
+; concatenate strings
+string;abc123;"abc" + "123"
+string;abc123def;"abc" + "123" + "def"

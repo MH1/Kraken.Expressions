@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard1.6;net46;net45;net40;net35</TargetFrameworks>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <DocumentationFile>bin\AnyCPU\$(TargetFramework)\ExpressionEvaluator.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Authors>Martin Hloušek</Authors>
+    <Company>Martin Hloušek</Company>
+    <Description>This library enables you to convert string into lambda expression and evaluate it.</Description>
+    <Copyright>Copyright © 2017 Martin Hloušek</Copyright>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.6'">
+    <DefineConstants>NETSTANDARD;FEATURE_ASYNC;FEATURE_DATA_ANNOTATIONS;FEATURE_GENERIC_TYPE_ARGS;FEATURE_TYPE_INFO</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net46' OR '$(TargetFramework)'=='net45' OR '$(TargetFramework)'=='net40'">
+    <DefineConstants>FEATURE_ASYNC;FEATURE_DATA_ANNOTATIONS;FEATURE_GENERIC_TYPE_ARGS</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard1.6|AnyCPU'">
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <TreatSpecificWarningsAsErrors></TreatSpecificWarningsAsErrors>
+    <NoWarn>1701;1702;1705</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard1.6'">
+    <PackageReference Include="System.Data.Common" Version="4.3.0" />
+<!--    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />-->
+    <PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="1.1.2" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='net35' OR '$(TargetFramework)'=='net40' OR '$(TargetFramework)'=='net45' OR '$(TargetFramework)'=='net46'">
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+  </ItemGroup>
+
+</Project>
