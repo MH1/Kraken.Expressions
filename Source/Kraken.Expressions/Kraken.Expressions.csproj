@@ -10,7 +10,7 @@
     <Company>Martin Hloušek</Company>
     <Description>This library enables you to convert string into lambda expression and evaluate it.</Description>
     <Copyright>Copyright © 2017 Martin Hloušek</Copyright>
-    <Version>0.9.0.0</Version>
+    <Version>0.9.1.0</Version>
     <PackageProjectUrl>https://github.com/MH1/Kraken.Expressions</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/MH1/Kraken.Expressions/blob/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
