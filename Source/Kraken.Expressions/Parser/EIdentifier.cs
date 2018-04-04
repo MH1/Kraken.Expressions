@@ -18,6 +18,7 @@ namespace Kraken.Expressions.Parser
 		{
 			typeof(EExpressionEnd),
 			typeof(EBinaryOperator),
+			typeof(EConditionalOperator),
 		};
 
 		/// <summary>

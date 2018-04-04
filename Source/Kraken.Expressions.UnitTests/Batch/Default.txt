@@ -216,6 +216,78 @@ int;21;#29.2.12 14:21:43#.Minute
 int;0;#29.2.12 14:21#.Second
 int;43;#29.2.12 14:21:43#.Second
 
+; DayOfWeek enum test
+bool;true;#2018-01-01#.DayOfWeek == DayOfWeek.Monday
+bool;true;#2018-01-02#.DayOfWeek == DayOfWeek.Tuesday
+bool;true;#2018-01-03#.DayOfWeek == DayOfWeek.Wednesday
+bool;true;#2018-01-04#.DayOfWeek == DayOfWeek.Thursday
+bool;true;#2018-01-05#.DayOfWeek == DayOfWeek.Friday
+bool;true;#2018-01-06#.DayOfWeek == DayOfWeek.Saturday
+bool;true;#2018-01-07#.DayOfWeek == DayOfWeek.Sunday
+
+; boolean logic
+bool;false;false || false
+bool;true;false || true
+bool;true;true || false
+bool;true;true || true
+bool;false;false && false
+bool;false;false && true
+bool;false;true && false
+bool;true;true && true
+bool;false;false ^ false
+bool;true;false ^ true
+bool;true;true ^ false
+bool;false;true ^ true
+
+bool;true;true || false && false
+bool;true;true || true && false
+bool;false;false || false && false
+bool;false;false || true && false
+bool;true;true || false && true
+bool;true;true || true && true
+bool;false;false || false && true
+bool;true;false || true && true
+
+bool;false;true && false || false
+bool;true;true && true || false
+bool;false;false && false || false
+bool;false;false && true || false
+bool;true;true && false || true
+bool;true;true && true || true
+bool;true;false && false || true
+bool;true;false && true || true
+
+bool;false;false OR false
+bool;true;false OR true
+bool;true;true OR false
+bool;true;true OR true
+bool;false;false AND false
+bool;false;false AND true
+bool;false;true AND false
+bool;true;true AND true
+bool;false;false XOR false
+bool;true;false XOR true
+bool;true;true XOR false
+bool;false;true XOR true
+
+bool;true;true OR false AND false
+bool;true;true OR true AND false
+bool;false;false OR false AND false
+bool;false;false OR true AND false
+bool;true;true OR false AND true
+bool;true;true OR true AND true
+bool;false;false OR false AND true
+bool;true;false OR true AND true
+
+bool;false;true AND false OR false
+bool;true;true AND true OR false
+bool;false;false AND false OR false
+bool;false;false AND true OR false
+bool;true;true AND false OR true
+bool;true;true AND true OR true
+bool;true;false AND false OR true
+bool;true;false AND true OR true
+
 ; simple conditions
 bool;true;1 == 1
 bool;false;1 == 2
@@ -224,9 +296,161 @@ bool;true;1 != 2
 bool;false;1 <> 1
 bool;true;1 <> 2
 
+; boolean logic with simple conditions
+bool;false;1 != 1 || 1 != 1
+bool;true;1 != 1 || 1 == 1
+bool;true;1 == 1 || 1 != 1
+bool;true;1 == 1 || 1 == 1
+bool;false;1 != 1 && 1 != 1
+bool;false;1 != 1 && 1 == 1
+bool;false;1 == 1 && 1 != 1
+bool;true;1 == 1 && 1 == 1
+bool;false;1 != 1 ^ 1 != 1
+bool;true;1 != 1 ^ 1 == 1
+bool;true;1 == 1 ^ 1 != 1
+bool;false;1 == 1 ^ 1 == 1
+
+bool;false;1 <> 1 || 1 <> 1
+bool;true;1 <> 1 || 1 == 1
+bool;true;1 == 1 || 1 <> 1
+bool;false;1 <> 1 && 1 <> 1
+bool;false;1 <> 1 && 1 == 1
+bool;false;1 == 1 && 1 <> 1
+bool;false;1 <> 1 ^ 1 <> 1
+bool;true;1 <> 1 ^ 1 == 1
+bool;true;1 == 1 ^ 1 <> 1
+
+bool;true;1 == 1 || 1 != 1 && 1 != 1
+bool;true;1 == 1 || 1 == 1 && 1 != 1
+bool;false;1 != 1 || 1 != 1 && 1 != 1
+bool;false;1 != 1 || 1 == 1 && 1 != 1
+bool;true;1 == 1 || 1 != 1 && 1 == 1
+bool;true;1 == 1 || 1 == 1 && 1 == 1
+bool;false;1 != 1 || 1 != 1 && 1 == 1
+bool;true;1 != 1 || 1 == 1 && 1 == 1
+
+bool;true;1 == 1 || 1 <> 1 && 1 <> 1
+bool;true;1 == 1 || 1 == 1 && 1 <> 1
+bool;false;1 <> 1 || 1 <> 1 && 1 <> 1
+bool;false;1 <> 1 || 1 == 1 && 1 <> 1
+bool;true;1 == 1 || 1 <> 1 && 1 == 1
+bool;false;1 <> 1 || 1 <> 1 && 1 == 1
+bool;true;1 <> 1 || 1 == 1 && 1 == 1
+
+bool;false;1 == 1 && 1 != 1 || 1 != 1
+bool;true;1 == 1 && 1 == 1 || 1 != 1
+bool;false;1 != 1 && 1 != 1 || 1 != 1
+bool;false;1 != 1 && 1 == 1 || 1 != 1
+bool;true;1 == 1 && 1 != 1 || 1 == 1
+bool;true;1 == 1 && 1 == 1 || 1 == 1
+bool;true;1 != 1 && 1 != 1 || 1 == 1
+bool;true;1 != 1 && 1 == 1 || 1 == 1
+
+bool;false;1 == 1 && 1 <> 1 || 1 <> 1
+bool;true;1 == 1 && 1 == 1 || 1 <> 1
+bool;false;1 <> 1 && 1 <> 1 || 1 <> 1
+bool;false;1 <> 1 && 1 == 1 || 1 <> 1
+bool;true;1 == 1 && 1 <> 1 || 1 == 1
+bool;true;1 <> 1 && 1 <> 1 || 1 == 1
+bool;true;1 <> 1 && 1 == 1 || 1 == 1
+
+bool;false;1 != 1 OR 1 != 1
+bool;true;1 != 1 OR 1 == 1
+bool;true;1 == 1 OR 1 != 1
+bool;true;1 == 1 OR 1 == 1
+bool;false;1 != 1 AND 1 != 1
+bool;false;1 != 1 AND 1 == 1
+bool;false;1 == 1 AND 1 != 1
+bool;true;1 == 1 AND 1 == 1
+bool;false;1 != 1 XOR 1 != 1
+bool;true;1 != 1 XOR 1 == 1
+bool;true;1 == 1 XOR 1 != 1
+bool;false;1 == 1 XOR 1 == 1
+
+bool;false;1 <> 1 OR 1 <> 1
+bool;true;1 <> 1 OR 1 == 1
+bool;true;1 == 1 OR 1 <> 1
+bool;false;1 <> 1 AND 1 <> 1
+bool;false;1 <> 1 AND 1 == 1
+bool;false;1 == 1 AND 1 <> 1
+bool;true;1 == 1 AND 1 == 1
+bool;false;1 <> 1 XOR 1 <> 1
+bool;true;1 <> 1 XOR 1 == 1
+bool;true;1 == 1 XOR 1 <> 1
+bool;false;1 == 1 XOR 1 == 1
+
+bool;true;1 == 1 OR 1 != 1 AND 1 != 1
+bool;true;1 == 1 OR 1 == 1 AND 1 != 1
+bool;false;1 != 1 OR 1 != 1 AND 1 != 1
+bool;false;1 != 1 OR 1 == 1 AND 1 != 1
+bool;true;1 == 1 OR 1 != 1 AND 1 == 1
+bool;true;1 == 1 OR 1 == 1 AND 1 == 1
+bool;false;1 != 1 OR 1 != 1 AND 1 == 1
+bool;true;1 != 1 OR 1 == 1 AND 1 == 1
+
+bool;true;1 == 1 OR 1 <> 1 AND 1 <> 1
+bool;true;1 == 1 OR 1 == 1 AND 1 <> 1
+bool;false;1 <> 1 OR 1 <> 1 AND 1 <> 1
+bool;false;1 <> 1 OR 1 == 1 AND 1 <> 1
+bool;true;1 == 1 OR 1 <> 1 AND 1 == 1
+bool;false;1 <> 1 OR 1 <> 1 AND 1 == 1
+bool;true;1 <> 1 OR 1 == 1 AND 1 == 1
+
+bool;false;1 == 1 AND 1 != 1 OR 1 != 1
+bool;true;1 == 1 AND 1 == 1 OR 1 != 1
+bool;false;1 != 1 AND 1 != 1 OR 1 != 1
+bool;false;1 != 1 AND 1 == 1 OR 1 != 1
+bool;true;1 == 1 AND 1 != 1 OR 1 == 1
+bool;true;1 == 1 AND 1 == 1 OR 1 == 1
+bool;true;1 != 1 AND 1 != 1 OR 1 == 1
+bool;true;1 != 1 AND 1 == 1 OR 1 == 1
+
+bool;false;1 == 1 AND 1 <> 1 OR 1 <> 1
+bool;true;1 == 1 AND 1 == 1 OR 1 <> 1
+bool;false;1 <> 1 AND 1 <> 1 OR 1 <> 1
+bool;false;1 <> 1 AND 1 == 1 OR 1 <> 1
+bool;true;1 == 1 AND 1 <> 1 OR 1 == 1
+bool;true;1 <> 1 AND 1 <> 1 OR 1 == 1
+bool;true;1 <> 1 AND 1 == 1 OR 1 == 1
+
+; iif
+int;1;true ? 1 : 0
+int;0;false ? 1 : 0
+
+; multiple iif
+int;2;false ? false ? 0 : 1 : 2
+int;2;false ? true ? 0 : 1 : 2
+int;1;true ? false ? 0 : 1 : 2
+int;0;true ? true ? 0 : 1 : 2
+int;2;false ? 0 : false ? 1 : 2
+int;1;false ? 0 : true ? 1 : 2
+int;0;true ? 0 : false ? 1 : 2
+int;0;true ? 0 : true ? 1 : 2
+
+; simple conditions with iif
+int;1;1 == 1 ? 1 : 0
+int;0;1 == 0 ? 1 : 0
+int;1;1 == 1 && 1 == 1 ? 1 : 0
+int;0;1 == 0 && 1 == 0 ? 1 : 0
+
+int;2;1 == 0 ? 1 == 0 ? 0 : 1 : 2
+int;2;1 == 0 ? 1 == 1 ? 0 : 1 : 2
+int;1;1 == 1 ? 1 == 0 ? 0 : 1 : 2
+int;0;1 == 1 ? 1 == 1 ? 0 : 1 : 2
+int;2;1 == 0 ? 0 : 1 == 0 ? 1 : 2
+int;1;1 == 0 ? 0 : 1 == 1 ? 1 : 2
+int;0;1 == 1 ? 0 : 1 == 0 ? 1 : 2
+int;0;1 == 1 ? 0 : 1 == 1 ? 1 : 2
+
 ; simple unary operators
 bool;true;!false
 bool;false;!true
+bool;true;NOT false
+bool;false;NOT true
+bool;true;!(1 == 0)
+bool;false;!(1 == 1)
+bool;true;NOT(1 == 0)
+bool;false;NOT(1 == 1)
 
 ; simple binary operators
 int;18;6 + 12

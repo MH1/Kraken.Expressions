@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.6;net46;net45;net40;net35</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard1.6;net46;net45;net40;net35</TargetFrameworks>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <DocumentationFile>bin\AnyCPU\$(TargetFramework)\ExpressionEvaluator.xml</DocumentationFile>
   </PropertyGroup>
@@ -15,7 +15,7 @@
     <PackageLicenseUrl>https://github.com/MH1/Kraken.Expressions/blob/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.6'">
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.6' OR '$(TargetFramework)'=='netstandard2.0'">
     <DefineConstants>NETSTANDARD;FEATURE_ASYNC;FEATURE_DATA_ANNOTATIONS;FEATURE_GENERIC_TYPE_ARGS;FEATURE_TYPE_INFO</DefineConstants>
   </PropertyGroup>
 
@@ -33,7 +33,13 @@
     <NoWarn>1701;1702;1705</NoWarn>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='netstandard1.6'">
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <TreatSpecificWarningsAsErrors></TreatSpecificWarningsAsErrors>
+    <NoWarn>1701;1702;1705</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard1.6' OR '$(TargetFramework)'=='netstandard2.0'">
     <PackageReference Include="System.Data.Common" Version="4.3.0" />
 <!--    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />-->
     <PackageReference Include="System.Dynamic.Runtime" Version="4.3.0" />

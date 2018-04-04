@@ -154,6 +154,7 @@ namespace Kraken.Expressions
 			bool changed = false;
 			changed |= CompileUnaryOperators(context, expressionTree);
 			changed |= CompileBinaryOperators(context, expressionTree);
+			changed |= CompileIIfOperators(context, expressionTree);
 
 			if (expressionTree.Count == 1 && expressionTree[0].Expression != null)
 				return expressionTree[0].Expression;
@@ -244,6 +245,52 @@ namespace Kraken.Expressions
 							expr2);
 					}
 					ProcessedItem newItem = ProcessedItem.Create(expr);
+					expressionTree.RemoveAt(i - 1);
+					expressionTree.RemoveAt(i - 1);
+					expressionTree.RemoveAt(i - 1);
+					expressionTree.Insert(i - 1, newItem);
+					return true;
+				}
+				return false;
+			});
+
+		protected virtual bool CompileIIfOperators(EvaluationContext context, IList<ProcessedItem> expressionTree) =>
+			ReverseLoop(expressionTree, i =>
+			{
+				ProcessedItem item = expressionTree[i];
+				if (i > 0 && expressionTree.Count > i + 3
+					&& expressionTree[i - 1].Expression != null
+					&& item.ItemType == typeof(EConditionalOperator)
+					&& item.Content == "?"
+					&& expressionTree[i + 1].Expression != null
+					&& expressionTree[i + 2].ItemType == typeof(EConditionalOperator)
+					&& expressionTree[i + 2].Content == ":"
+					&& expressionTree[i + 3].Expression != null
+					)
+				{
+					Expression expr0 = expressionTree[i - 1].Expression;
+					Expression expr1 = expressionTree[i + 1].Expression;
+					Expression expr2 = expressionTree[i + 3].Expression;
+
+					Type resultType = context.ConsolidateBinaryTypes(context, expr1.Type, expr2.Type);
+					if (expr1.Type != resultType)
+						expr1 = Expression.Convert(expr1, resultType);
+					if (expr2.Type != resultType)
+						expr2 = Expression.Convert(expr2, resultType);
+
+					Expression expr;
+					if (expr1.Type == typeof(string) && item.Content == "+")
+					{
+						expr = Expression.Call(StringConcat, new[] { expr1, expr2 });
+					}
+					else
+					{
+						expr =
+							Expression.Condition(expr0, expr1, expr2);
+					}
+					ProcessedItem newItem = ProcessedItem.Create(expr);
+					expressionTree.RemoveAt(i - 1);
+					expressionTree.RemoveAt(i - 1);
 					expressionTree.RemoveAt(i - 1);
 					expressionTree.RemoveAt(i - 1);
 					expressionTree.RemoveAt(i - 1);

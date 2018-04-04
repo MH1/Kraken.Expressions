@@ -29,10 +29,11 @@ namespace Kraken.Expressions.Parser
 		/// <returns>The string block to parse or null if the block doesn't match the current <see cref="EConditionalOperator"/></returns>
 		public override string Get(EvaluationContext context, ref string expression)
 		{
-			if (expression.Length == 0 || (expression[0] != '?' && expression[1] != ':'))
+			if (expression.Length == 0 || (expression[0] != '?' && expression[0] != ':'))
 				return null;
+			var result = expression[0].ToString();
 			expression = expression.Substring(1);
-			return expression[0].ToString();
+			return result;
 		}
 	}
 }

@@ -25,9 +25,11 @@ namespace Kraken.Expressions.UnitTests
 			=> TestSingleFile("Default.txt");
 
 		/// <summary>
+		/// <summary>
 		/// Test all files in Batch folder.
 		/// </summary>
-		public static void TestAll()
+		[Test]
+		public void TestAllBatches()
 		{
 			string dir = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
 			foreach (string file in Directory.GetFiles(Path.Combine(dir, "Batch"), "*.txt"))
@@ -130,8 +132,8 @@ namespace Kraken.Expressions.UnitTests
 		private static readonly string[] DateFormats = new[]
 		{
 			"yyyy-MM-dd",
-			"yyyy-MM-dd H:m",
-			"yyyy-MM-dd H:m:s",
+			"yyyy-MM-dd H:mm",
+			"yyyy-MM-dd H:mm:ss",
 		};
 
 		private static object ParseResult(Type type, string value)

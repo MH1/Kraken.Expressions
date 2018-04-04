@@ -113,17 +113,17 @@ namespace Kraken.Expressions
 		/// </summary>
 		internal string[][] Priority = new[]
 		{
-			//new[] { "!", "~"  }, // unary operators
-			new[] { "*", "/", "%" },
+			//new[] { "!", "NOT", "~"  }, // unary operators
+			new[] { "*", "/", "%", "MOD" },
 			new[] { "+", "-" },
-			new[] { "<<", ">>" },
+			new[] { "<<", ">>", "SRL", "SHR" },
 			new[] { "<", ">", "<=", ">=" },
 			new[] { "==", "!=", "<>" },
 			new[] { "&" },
-			new[] { "^" },
+			new[] { "^", "XOR" },
 			new[] { "|" },
-			new[] { "&&" },
-			new[] { "||" },
+			new[] { "&&", "AND" },
+			new[] { "||", "OR" },
 			new[] { "??" },
 			//new[] { "?", ":" }, // ?:
 			// assignment
@@ -136,6 +136,7 @@ namespace Kraken.Expressions
 		internal Dictionary<string, ExpressionType> UnaryNodeTypes = new Dictionary<string, ExpressionType>
 		{
 			{"!", ExpressionType.Not },
+			{"NOT", ExpressionType.Not },
 #if !NET35
 			{"~", ExpressionType.OnesComplement },
 #endif
@@ -151,9 +152,12 @@ namespace Kraken.Expressions
 			// logical
 			{"|", ExpressionType.Or},
 			{"||", ExpressionType.OrElse},
+			{"OR", ExpressionType.OrElse},
 			{"&", ExpressionType.And},
 			{"&&", ExpressionType.AndAlso},
+			{"AND", ExpressionType.AndAlso},
 			{"^", ExpressionType.ExclusiveOr},
+			{"XOR", ExpressionType.ExclusiveOr},
 
 			// comparison
 			{"!=", ExpressionType.NotEqual},
@@ -170,9 +174,12 @@ namespace Kraken.Expressions
 			{"*", ExpressionType.Multiply},
 			{"/", ExpressionType.Divide},
 			{"%", ExpressionType.Modulo},
+			{"MOD", ExpressionType.Modulo},
 			{"??", ExpressionType.Coalesce},
 			{"<<", ExpressionType.LeftShift},
+			{"SHL", ExpressionType.LeftShift},
 			{">>", ExpressionType.RightShift},
+			{"SHR", ExpressionType.RightShift},
 
 			// mathematical functions with assignment
 			//{"+=", ExpressionType.AddAssign},
