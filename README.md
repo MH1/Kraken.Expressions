@@ -39,10 +39,12 @@ bool result5 = context.EvaluateExpression<bool>("DateTime.Now.DayOfWeek == DayOf
 Re-use the precompiled lambda expression to speed-up the evaluation time.
 ```csharp
 EvaluationContext context = new EvaluationContext();
+// set input parameters x, y
 context.AddParameters(new[] { "x", "y" }, new[] { typeof(int), typeof(int) });
+// prepare two expressions
 var expression = context.Precompile<int, int>("(x + 2) * y");
 var expression2 = context.Precompile<int, int>("(x + 4) * y");
-//	and invoke with multiple parameters
+// and invoke with multiple parameters x, y
 var result1 = expression.Invoke(1, 2);
 var result2 = expression.Invoke(2, 3);
 var result3 = expression.Invoke(3, 4);
