@@ -25,7 +25,6 @@ namespace Kraken.Expressions.UnitTests
 			=> TestSingleFile("Default.txt");
 
 		/// <summary>
-		/// <summary>
 		/// Test all files in Batch folder.
 		/// </summary>
 		[Test]

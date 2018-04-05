@@ -207,7 +207,7 @@ namespace Kraken.Expressions
 		}
 
 		/// <summary>
-		/// Compile the binary operators one the same level of priority. It uses the <seealso cref="EvaluationContext.Priority"/> setting.
+		/// Compile the binary operators on the same level of priority. It uses the <seealso cref="EvaluationContext.Priority"/> setting.
 		/// </summary>
 		/// <param name="context">The context of evaluation.</param>
 		/// <param name="expressionTree">The expression tree.</param>
@@ -254,6 +254,12 @@ namespace Kraken.Expressions
 				return false;
 			});
 
+		/// <summary>
+		/// Compile the conditional operators.
+		/// </summary>
+		/// <param name="context">The context of evaluation.</param>
+		/// <param name="expressionTree">The expression tree.</param>
+		/// <returns>True if it changed the expression tree.</returns>
 		protected virtual bool CompileIIfOperators(EvaluationContext context, IList<ProcessedItem> expressionTree) =>
 			ReverseLoop(expressionTree, i =>
 			{
