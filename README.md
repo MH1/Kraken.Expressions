@@ -42,14 +42,14 @@ EvaluationContext context = new EvaluationContext();
 // set input parameters x, y
 context.AddParameters(new[] { "x", "y" }, new[] { typeof(int), typeof(int) });
 // prepare two expressions
-var expression = context.Precompile<int, int>("(x + 2) * y");
-var expression2 = context.Precompile<int, int>("(x + 4) * y");
+PrecompiledExpression<int, int> expression = context.Precompile<int, int>("(x + 2) * y");
+PrecompiledExpression<int, int> expression2 = context.Precompile<int, int>("(x + 4) * y");
 // and invoke with multiple parameters x, y
-var result1 = expression.Invoke(1, 2);
-var result2 = expression.Invoke(2, 3);
-var result3 = expression.Invoke(3, 4);
-var result4 = expression2.Invoke(1, 5);
-var result5 = expression2.Invoke(2, 6);
+object result1 = expression.Invoke(1, 2);
+object result2 = expression.Invoke(2, 3);
+object result3 = expression.Invoke(3, 4);
+object result4 = expression2.Invoke(1, 5);
+object result5 = expression2.Invoke(2, 6);
 ```
 
 ### Supported operators
