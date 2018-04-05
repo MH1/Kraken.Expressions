@@ -1,6 +1,7 @@
 ﻿using Kraken.Expressions.Parser;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -147,7 +148,7 @@ namespace Kraken.Expressions
 		/// <summary>
 		/// The binary expression translation table.
 		/// </summary>
-		internal Dictionary<string, ExpressionType> BinaryNodeTypes = new Dictionary<string, ExpressionType>
+		internal Dictionary<string, ExpressionType> BinaryNodeTypes = new Dictionary<string, ExpressionType>(StringComparer.OrdinalIgnoreCase)
 		{
 			// logical
 			{"|", ExpressionType.Or},

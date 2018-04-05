@@ -221,7 +221,7 @@ namespace Kraken.Expressions
 					&& item.ItemType == typeof(EBinaryOperator)
 					&& expressionTree[i - 1].Expression != null
 					&& expressionTree[i + 1].Expression != null
-					&& (context.Priority[priority].Contains(item.Content)))
+					&& (context.Priority[priority].Contains(item.Content, StringComparer.OrdinalIgnoreCase)))
 				{
 					Expression expr1 = expressionTree[i - 1].Expression;
 					Expression expr2 = expressionTree[i + 1].Expression;

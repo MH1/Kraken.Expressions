@@ -30,7 +30,7 @@ namespace Kraken.Expressions.Parser
 		{
 			string result = null;
 			string exp = expression;
-			result = context.BinaryNodeTypes.Keys.Where(v => exp.StartsWith(v)).OrderByDescending(v => v.Length).FirstOrDefault();
+			result = context.BinaryNodeTypes.Keys.Where(v => exp.StartsWith(v, StringComparison.OrdinalIgnoreCase)).OrderByDescending(v => v.Length).FirstOrDefault();
 			int len = result?.Length ?? 0;
 			if (len > 0)
 				expression = expression.Substring(len);

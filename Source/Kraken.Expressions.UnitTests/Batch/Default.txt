@@ -288,6 +288,68 @@ bool;true;true AND true OR true
 bool;true;false AND false OR true
 bool;true;false AND true OR true
 
+bool;false;false or false
+bool;true;false or true
+bool;true;true or false
+bool;true;true or true
+bool;false;false and false
+bool;false;false and true
+bool;false;true and false
+bool;true;true and true
+bool;false;false xor false
+bool;true;false xor true
+bool;true;true xor false
+bool;false;true xor true
+
+bool;true;true or false and false
+bool;true;true or true and false
+bool;false;false or false and false
+bool;false;false or true and false
+bool;true;true or false and true
+bool;true;true or true and true
+bool;false;false or false and true
+bool;true;false or true and true
+
+bool;false;true and false or false
+bool;true;true and true or false
+bool;false;false and false or false
+bool;false;false and true or false
+bool;true;true and false or true
+bool;true;true and true or true
+bool;true;false and false or true
+bool;true;false and true or true
+
+bool;false;false Or false
+bool;true;false Or true
+bool;true;true Or false
+bool;true;true Or true
+bool;false;false And false
+bool;false;false And true
+bool;false;true And false
+bool;true;true And true
+bool;false;false Xor false
+bool;true;false Xor true
+bool;true;true Xor false
+bool;false;true Xor true
+
+bool;true;true Or false And false
+bool;true;true Or true And false
+bool;false;false Or false And false
+bool;false;false Or true And false
+bool;true;true Or false And true
+bool;true;true Or true And true
+bool;false;false Or false And true
+bool;true;false Or true And true
+
+bool;false;true And false Or false
+bool;true;true And true Or false
+bool;false;false And false Or false
+bool;false;false And true Or false
+bool;true;true And false Or true
+bool;true;true And true Or true
+bool;true;false And false Or true
+bool;true;false And true Or true
+
 ; simple conditions
 bool;true;1 == 1
 bool;false;1 == 2
