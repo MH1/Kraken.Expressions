@@ -39,22 +39,26 @@ bool result5 = context.EvaluateExpression<bool>("DateTime.Now.DayOfWeek == DayOf
 Re-use the precompiled lambda expression to speed-up the evaluation time.
 ```csharp
 EvaluationContext context = new EvaluationContext();
-var expr1 = context.Precompile<int, int>("(x + 2) * y");
+context.AddParameters(new[] { "x", "y" }, new[] { typeof(int), typeof(int) });
+var expression = context.Precompile<int, int>("(x + 2) * y");
+var expression2 = context.Precompile<int, int>("(x + 4) * y");
 //	and invoke with multiple parameters
-var result1 = expr1.Invoke(1, 2);
-var result2 = expr1.Invoke(2, 3);
-var result2 = expr1.Invoke(3, 4);
+var result1 = expression.Invoke(1, 2);
+var result2 = expression.Invoke(2, 3);
+var result3 = expression.Invoke(3, 4);
+var result4 = expression2.Invoke(1, 5);
+var result5 = expression2.Invoke(2, 6);
 ```
 
 ### Supported operators
-- Operators +, -, *, /, %, MOD
-- Bit shift <<, >>, SHL, SHR
+- Mathematical operators +, -, *, /, %, MOD
+- Bit shifting <<, >>, SHL, SHR
 - Comparison <, >, <=, >=, ==, !=, <>
-- Logical &, |, ^, XOR, &&, ||, AND, OR
+- Logical &, |, ^, &&, ||, AND, OR, XOR
 - ??
 - ? :
 - Negate !, NOT
-- String concatenation
+- String concatenation +
 - Property evaluation
 - Static method call
 - ...etc. See also examples in the [test file](https://github.com/MH1/Kraken.Expressions/blob/master/Source/Kraken.Expressions.UnitTests/Batch/Default.txt)
