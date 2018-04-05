@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard1.6;net46;net45;net40;net35</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard1.6;net47;net46;net45;net40;net35</TargetFrameworks>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <DocumentationFile>bin\AnyCPU\$(TargetFramework)\ExpressionEvaluator.xml</DocumentationFile>
   </PropertyGroup>
@@ -10,7 +10,7 @@
     <Company>Martin Hloušek</Company>
     <Description>This library enables you to convert string into lambda expression and evaluate it.</Description>
     <Copyright>Copyright © 2017 Martin Hloušek</Copyright>
-    <Version>0.9.1.0</Version>
+    <Version>0.9.2.0</Version>
     <PackageProjectUrl>https://github.com/MH1/Kraken.Expressions</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/MH1/Kraken.Expressions/blob/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
@@ -19,7 +19,7 @@
     <DefineConstants>NETSTANDARD;FEATURE_ASYNC;FEATURE_DATA_ANNOTATIONS;FEATURE_GENERIC_TYPE_ARGS;FEATURE_TYPE_INFO</DefineConstants>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)'=='net46' OR '$(TargetFramework)'=='net45' OR '$(TargetFramework)'=='net40'">
+  <PropertyGroup Condition="'$(TargetFramework)'=='net47' OR '$(TargetFramework)'=='net46' OR '$(TargetFramework)'=='net45' OR '$(TargetFramework)'=='net40'">
     <DefineConstants>FEATURE_ASYNC;FEATURE_DATA_ANNOTATIONS;FEATURE_GENERIC_TYPE_ARGS</DefineConstants>
   </PropertyGroup>
 
@@ -46,7 +46,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="1.1.2" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)'=='net35' OR '$(TargetFramework)'=='net40' OR '$(TargetFramework)'=='net45' OR '$(TargetFramework)'=='net46'">
+  <ItemGroup Condition="'$(TargetFramework)'=='net35' OR '$(TargetFramework)'=='net40' OR '$(TargetFramework)'=='net45' OR '$(TargetFramework)'=='net46' OR '$(TargetFramework)'=='net47'">
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
