@@ -475,6 +475,124 @@ bool;true;1 == 1 AND 1 <> 1 OR 1 == 1
 bool;true;1 <> 1 AND 1 <> 1 OR 1 == 1
 bool;true;1 <> 1 AND 1 == 1 OR 1 == 1
 
+bool;false;1 != 1 or 1 != 1
+bool;true;1 != 1 or 1 == 1
+bool;true;1 == 1 or 1 != 1
+bool;true;1 == 1 or 1 == 1
+bool;false;1 != 1 and 1 != 1
+bool;false;1 != 1 and 1 == 1
+bool;false;1 == 1 and 1 != 1
+bool;true;1 == 1 and 1 == 1
+bool;false;1 != 1 xor 1 != 1
+bool;true;1 != 1 xor 1 == 1
+bool;true;1 == 1 xor 1 != 1
+bool;false;1 == 1 xor 1 == 1
+
+bool;false;1 <> 1 or 1 <> 1
+bool;true;1 <> 1 or 1 == 1
+bool;true;1 == 1 or 1 <> 1
+bool;false;1 <> 1 and 1 <> 1
+bool;false;1 <> 1 and 1 == 1
+bool;false;1 == 1 and 1 <> 1
+bool;true;1 == 1 and 1 == 1
+bool;false;1 <> 1 xor 1 <> 1
+bool;true;1 <> 1 xor 1 == 1
+bool;true;1 == 1 xor 1 <> 1
+bool;false;1 == 1 xor 1 == 1
+
+bool;true;1 == 1 or 1 != 1 and 1 != 1
+bool;true;1 == 1 or 1 == 1 and 1 != 1
+bool;false;1 != 1 or 1 != 1 and 1 != 1
+bool;false;1 != 1 or 1 == 1 and 1 != 1
+bool;true;1 == 1 or 1 != 1 and 1 == 1
+bool;true;1 == 1 or 1 == 1 and 1 == 1
+bool;false;1 != 1 or 1 != 1 and 1 == 1
+bool;true;1 != 1 or 1 == 1 and 1 == 1
+
+bool;true;1 == 1 or 1 <> 1 and 1 <> 1
+bool;true;1 == 1 or 1 == 1 and 1 <> 1
+bool;false;1 <> 1 or 1 <> 1 and 1 <> 1
+bool;false;1 <> 1 or 1 == 1 and 1 <> 1
+bool;true;1 == 1 or 1 <> 1 and 1 == 1
+bool;false;1 <> 1 or 1 <> 1 and 1 == 1
+bool;true;1 <> 1 or 1 == 1 and 1 == 1
+
+bool;false;1 == 1 and 1 != 1 or 1 != 1
+bool;true;1 == 1 and 1 == 1 or 1 != 1
+bool;false;1 != 1 and 1 != 1 or 1 != 1
+bool;false;1 != 1 and 1 == 1 or 1 != 1
+bool;true;1 == 1 and 1 != 1 or 1 == 1
+bool;true;1 == 1 and 1 == 1 or 1 == 1
+bool;true;1 != 1 and 1 != 1 or 1 == 1
+bool;true;1 != 1 and 1 == 1 or 1 == 1
+
+bool;false;1 == 1 and 1 <> 1 or 1 <> 1
+bool;true;1 == 1 and 1 == 1 or 1 <> 1
+bool;false;1 <> 1 and 1 <> 1 or 1 <> 1
+bool;false;1 <> 1 and 1 == 1 or 1 <> 1
+bool;true;1 == 1 and 1 <> 1 or 1 == 1
+bool;true;1 <> 1 and 1 <> 1 or 1 == 1
+bool;true;1 <> 1 and 1 == 1 or 1 == 1
+
+bool;false;1 != 1 Or 1 != 1
+bool;true;1 != 1 Or 1 == 1
+bool;true;1 == 1 Or 1 != 1
+bool;true;1 == 1 Or 1 == 1
+bool;false;1 != 1 And 1 != 1
+bool;false;1 != 1 And 1 == 1
+bool;false;1 == 1 And 1 != 1
+bool;true;1 == 1 And 1 == 1
+bool;false;1 != 1 Xor 1 != 1
+bool;true;1 != 1 Xor 1 == 1
+bool;true;1 == 1 Xor 1 != 1
+bool;false;1 == 1 Xor 1 == 1
+
+bool;false;1 <> 1 Or 1 <> 1
+bool;true;1 <> 1 Or 1 == 1
+bool;true;1 == 1 Or 1 <> 1
+bool;false;1 <> 1 And 1 <> 1
+bool;false;1 <> 1 And 1 == 1
+bool;false;1 == 1 And 1 <> 1
+bool;true;1 == 1 And 1 == 1
+bool;false;1 <> 1 Xor 1 <> 1
+bool;true;1 <> 1 Xor 1 == 1
+bool;true;1 == 1 Xor 1 <> 1
+bool;false;1 == 1 Xor 1 == 1
+
+bool;true;1 == 1 Or 1 != 1 And 1 != 1
+bool;true;1 == 1 Or 1 == 1 And 1 != 1
+bool;false;1 != 1 Or 1 != 1 And 1 != 1
+bool;false;1 != 1 Or 1 == 1 And 1 != 1
+bool;true;1 == 1 Or 1 != 1 And 1 == 1
+bool;true;1 == 1 Or 1 == 1 And 1 == 1
+bool;false;1 != 1 Or 1 != 1 And 1 == 1
+bool;true;1 != 1 Or 1 == 1 And 1 == 1
+
+bool;true;1 == 1 Or 1 <> 1 And 1 <> 1
+bool;true;1 == 1 Or 1 == 1 And 1 <> 1
+bool;false;1 <> 1 Or 1 <> 1 And 1 <> 1
+bool;false;1 <> 1 Or 1 == 1 And 1 <> 1
+bool;true;1 == 1 Or 1 <> 1 And 1 == 1
+bool;false;1 <> 1 Or 1 <> 1 And 1 == 1
+bool;true;1 <> 1 Or 1 == 1 And 1 == 1
+
+bool;false;1 == 1 And 1 != 1 Or 1 != 1
+bool;true;1 == 1 And 1 == 1 Or 1 != 1
+bool;false;1 != 1 And 1 != 1 Or 1 != 1
+bool;false;1 != 1 And 1 == 1 Or 1 != 1
+bool;true;1 == 1 And 1 != 1 Or 1 == 1
+bool;true;1 == 1 And 1 == 1 Or 1 == 1
+bool;true;1 != 1 And 1 != 1 Or 1 == 1
+bool;true;1 != 1 And 1 == 1 Or 1 == 1
+
+bool;false;1 == 1 And 1 <> 1 Or 1 <> 1
+bool;true;1 == 1 And 1 == 1 Or 1 <> 1
+bool;false;1 <> 1 And 1 <> 1 Or 1 <> 1
+bool;false;1 <> 1 And 1 == 1 Or 1 <> 1
+bool;true;1 == 1 And 1 <> 1 Or 1 == 1
+bool;true;1 <> 1 And 1 <> 1 Or 1 == 1
+bool;true;1 <> 1 And 1 == 1 Or 1 == 1
+
 ; iif
 int;1;true ? 1 : 0
 int;0;false ? 1 : 0
