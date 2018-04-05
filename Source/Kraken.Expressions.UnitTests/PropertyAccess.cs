@@ -56,5 +56,29 @@ namespace Kraken.Expressions.UnitTests
 			int v = context.EvaluateExpression<int>("par3.par4.b", obj1);
 			Assert.AreEqual(56, v);
 		}
+
+		/// <summary>
+		/// Expression with static property and enum in System namespace
+		/// </summary>
+		[Test]
+		public void EvaluateProperty5()
+		{
+			EvaluationContext context = new EvaluationContext();
+			DayOfWeek v = context.EvaluateExpression<DayOfWeek>("DateTime.Today.DayOfWeek");
+			Assert.AreEqual(DateTime.Today.DayOfWeek, v);
+			v = context.EvaluateExpression<DayOfWeek>("System.DateTime.Today.DayOfWeek");
+			Assert.AreEqual(DateTime.Today.DayOfWeek, v);
+		}
+
+		/// <summary>
+		/// Expression with static property and enum in System namespace
+		/// </summary>
+		[Test]
+		public void EvaluateProperty6()
+		{
+			EvaluationContext context = new EvaluationContext();
+			bool v = context.EvaluateExpression<bool>("DateTime.Today.DayOfWeek == DayOfWeek.Friday");
+			Assert.AreEqual(DateTime.Today.DayOfWeek == DayOfWeek.Friday, v);
+		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kraken.Expressions.NetStandard;
+using System;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -40,81 +41,116 @@ namespace Kraken.Expressions.Parser
 			if (valObj == "false")
 				return Expression.Constant(false, typeof(bool));
 
-			string[] mem = message.Split(new[] { '.' }, 2);
-			if (context.TypeAliases.ContainsKey(mem[0]))
+			string[] me = message.Split(new[] { '.' }, 2);
+
+			// parameter first
+			Expression exp = context.ParamListExpressions.FirstOrDefault(p => p.Name == me[0]);
+			Type t = null;
+			string rest = null;
+
+			// found the parameter
+			if (exp != null)
 			{
-				Type t = context.TypeAliases[mem[0]];
-				MemberInfo[] me = t.GetMember(mem[1]);
-				return Expression.MakeMemberAccess(null, me[0]);
+				rest = me.Length > 1 ? me[1] : null;
+				if (string.IsNullOrEmpty(rest))
+					return exp;
+			}
+
+			// check the defined type aliases
+			if (exp == null && context.TypeAliases.ContainsKey(me[0]))
+			{
+				t = context.TypeAliases[me[0]];
+				rest = me.Length > 1 ? me[1] : null;
+				//MemberInfo[] mi = t.GetMember(me[1]);
+				//return Expression.MakeMemberAccess(null, me[0]);
+			}
+
+			if (exp == null && t == null)
+			{
+				Assembly[] asm = Reflect.GetAssemblies();
+				// find class in included namespaces
+				me = message.Split(new[] { '.' });
+				foreach (var ns in new[] { string.Empty }.Union(context.Namespaces))
+				{
+					// search nested namespaces
+					for (int i = 0; i < me.Length && t == null; i++)
+					{
+						Type t0 = asm.Select(o => o.GetType($"{ns}.{string.Join(".", me.Take(i + 1).ToArray())}", false))
+							.FirstOrDefault(o => o != null);
+						if (t0 != null)
+						{
+							t = t0;
+							rest = string.Join(".", me.Skip(i + 1).ToArray());
+						}
+					}
+					if (t != null)
+						break;
+				}
+			}
+
+			if (exp == null && t == null)
+				throw new EvaluationException($"Unable to evaluate {message}");
+
+			if (string.IsNullOrEmpty(rest))
+			{
+				// TODO type
 			}
 			else
 			{
-				foreach (string ns in context.Namespaces)
+				me = rest.Split(new[] { '.' });
+				Type t2;
+				foreach (string m in me)
 				{
-					Assembly[] asm;
-#if NETSTANDARD1_6
-					asm = NetStandard.AppDomain.CurrentDomain.GetAssemblies();
-#else
-					asm = AppDomain.CurrentDomain.GetAssemblies();
-#endif
-					Type t = asm.Select(o => o.GetType($"{ns}.{mem[0]}", false))
-						.FirstOrDefault(o => o != null);
-					if (t != null)
+					t = t ?? exp?.Type;
+					if (exp == null || t == null)
 					{
-						MemberInfo[] me = t.GetMember(mem[1]);
-						return Expression.MakeMemberAccess(null, me[0]);
+						MemberInfo[] mi = t.GetMember(m);
+						if (me.Length > 0)
+						{
+							exp = Expression.MakeMemberAccess(exp, mi[0]);
+							t = t2 = exp.Type;
+							continue;
+						}
+					}
+
+#if FEATURE_TYPE_INFO
+					t2 = t.GetTypeInfo().GetProperty(m)?.PropertyType;
+#else
+					t2 = t.GetProperty(m)?.PropertyType;
+#endif
+					if (t == null)
+					{
+						throw new EvaluationException($"Unable to find property {m} on type {t.Name}.");
+					}
+
+#if FEATURE_TYPE_INFO
+					if (exp.Type.GetTypeInfo().IsAssignableFrom((Type)null))
+#else
+					if (exp.Type.IsAssignableFrom((Type)null))
+#endif
+					{
+						// checked
+						exp = Expression.Coalesce(
+							Expression.PropertyOrField(exp, m),
+							Expression.Constant(null, exp.Type));
+					}
+					else
+					{
+						// unchecked
+						exp = Expression.PropertyOrField(
+							exp,
+							m);
 					}
 				}
 			}
-			return TranslateMemberAccess(context, message);
-		}
 
-		private Expression TranslateMemberAccess(EvaluationContext context, string expression)
-		{
-			MatchCollection m = Regex.Matches(expression, "^" + Constants.REGEX_Identifier, RegexOptions.IgnoreCase);
-			string[] ma = m[0].Value.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
+			if (exp != null)
+				return exp;
 
-			Expression exp = context.ParamListExpressions.FirstOrDefault(p => p.Name == ma[0]);
-			if (exp == null)
-			{
-				throw new EvaluationException($"Unable to evaluate identifier {ma[0]}");
-			}
-			Type t = exp.Type, t2 = exp.Type;
-			for (int i = 1; i < ma.Length; i++)
-			{
-				if (string.IsNullOrEmpty(ma[i]))
-					continue;
-#if FEATURE_TYPE_INFO
-				t2 = t.GetTypeInfo().GetProperty(ma[i])?.PropertyType;
-#else
-				t2 = t.GetProperty(ma[i])?.PropertyType;
-#endif
-				if (t == null)
-				{
-					throw new EvaluationException($"Unable to find property {ma[i]} on type {t.Name}.");
-				}
+			if (t == null)
+				throw new EvaluationException($"Unable to evaluate {rest} on type {t.FullName}");
 
-#if FEATURE_TYPE_INFO
-				if (exp.Type.GetTypeInfo().IsAssignableFrom((Type)null))
-#else
-				if (exp.Type.IsAssignableFrom((Type)null))
-#endif
-				{
-					// checked
-					exp = Expression.Coalesce(
-						Expression.PropertyOrField(exp, ma[i]),
-						Expression.Constant(null, exp.Type));
-				}
-				else
-				{
-					// unchecked
-					exp = Expression.PropertyOrField(
-						exp,
-						ma[i]);
-				}
-			}
-			//exp = Expression.Convert(exp, exp.Type);
-			return exp;
+			return null;
 		}
 	}
 }
