@@ -35,7 +35,8 @@ namespace Kraken.Expressions
 		/// </summary>
 		/// <param name="context">The context of evaluation</param>
 		/// <param name="message">The message to convert</param>
+		/// <param name="data">Result expression data</param>
 		/// <returns>The result expression</returns>
-		Expression GetExpression(EvaluationContext context, string message);
+		Expression GetExpression(EvaluationContext context, string message, ref ExpressionData data);
 	}
 }

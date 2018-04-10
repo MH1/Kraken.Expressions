@@ -1,5 +1,7 @@
 # Kraken.Expressions
 [![Nuget](https://img.shields.io/nuget/v/Kraken.Expressions.svg)](https://www.nuget.org/packages/Kraken.Expressions/)
+[![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-brightgreen.svg)](LICENSE)
+[![Author](https://img.shields.io/badge/author-Martin%20Hloušek-blue.svg)](http://www.hlousek.org)
 
 The expression compiler and evaluation library.
 

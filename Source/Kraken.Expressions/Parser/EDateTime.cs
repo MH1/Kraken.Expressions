@@ -29,8 +29,9 @@ namespace Kraken.Expressions.Parser
 		/// </summary>
 		/// <param name="context">The context of evaluation</param>
 		/// <param name="message">The message to convert</param>
+		/// <param name="data">Result expression data</param>
 		/// <returns>The result expression</returns>
-		public override Expression GetExpression(EvaluationContext context, string message)
+		public override Expression GetExpression(EvaluationContext context, string message, ref ExpressionData data)
 		{
 			DateTime value = DateTime.ParseExact(message, context.DateTimeFormats, CultureInfo.InvariantCulture, DateTimeStyles.None);
 			return Expression.Constant(value, value.GetType());

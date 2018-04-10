@@ -16,10 +16,11 @@ namespace Kraken.Expressions.Parser
 			typeof(EBinaryOperator),
 			typeof(EConditionalOperator),
 
-			typeof(ExpressionBlock),
+			typeof(ETypeCast),
 			typeof(EConstant),
 			typeof(EIdentifier),
 			typeof(EString),
+			typeof(EChar),
 		};
 
 		/// <summary>

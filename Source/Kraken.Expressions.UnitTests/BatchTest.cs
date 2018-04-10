@@ -24,6 +24,15 @@ namespace Kraken.Expressions.UnitTests
 		public void DefaultBatch()
 			=> TestSingleFile("Default.txt");
 
+#if DEBUG
+		/// <summary>
+		/// File: Default.txt
+		/// </summary>
+		[Test]
+		public void ToDoBatch()
+			=> TestSingleFile("ToDo.txt");
+#endif
+
 		/// <summary>
 		/// Test all files in Batch folder.
 		/// </summary>
@@ -150,7 +159,7 @@ namespace Kraken.Expressions.UnitTests
 						return byte.Parse(value, CultureInfo.InvariantCulture);
 					return Enum.Parse(type, value, true);
 				case TypeCode.Char:
-					return char.Parse(value);
+					return char.Parse(value.Substring(0));
 				case TypeCode.DateTime:
 					return DateTime.ParseExact(value, DateFormats, CultureInfo.InvariantCulture, DateTimeStyles.None);
 				case TypeCode.Decimal:

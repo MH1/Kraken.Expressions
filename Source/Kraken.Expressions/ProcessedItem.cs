@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Kraken.Expressions.Parser;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -31,6 +32,17 @@ namespace Kraken.Expressions
 		}
 
 		/// <summary>
+		/// Create the instance of <see cref="ProcessedItem"/> with a compiled part of type cast.
+		/// </summary>
+		/// <param name="itemType"><see cref="ExpressionPart"/> type of the block.</param>
+		/// <param name="typeToCast">Type to cast</param>
+		public ProcessedItem(Type itemType, Type typeToCast)
+		{
+			this.ItemType = itemType;
+			this.TypeToCast = typeToCast;
+		}
+
+		/// <summary>
 		/// <see cref="ExpressionPart"/> type of block.
 		/// </summary>
 		public Type ItemType { get; private set; }
@@ -44,6 +56,12 @@ namespace Kraken.Expressions
 		/// The compiled part of the expression.
 		/// </summary>
 		public Expression Expression { get; private set; }
+
+		/// <summary>
+		/// Type cast
+		/// </summary>
+		public Type TypeToCast { get; private set; }
+
 
 		/// <summary>
 		/// Get the instance of <see cref="ProcessedItem"/> identified by parser.
@@ -64,6 +82,16 @@ namespace Kraken.Expressions
 		public static ProcessedItem Create(Expression expression)
 		{
 			return new ProcessedItem(expression);
+		}
+
+		/// <summary>
+		/// Get the instance of <see cref="ProcessedItem"/> with a type to cast.
+		/// </summary>
+		/// <param name="typeToCast">Type to cast</param>
+		/// <returns>Instance of the <see cref="ProcessedItem"/></returns>
+		public static ProcessedItem CreateCast(Type typeToCast)
+		{
+			return new ProcessedItem(typeof(ETypeCast), typeToCast);
 		}
 
 		/// <summary>

@@ -41,8 +41,9 @@ namespace Kraken.Expressions
 		/// </summary>
 		/// <param name="context">The context of evaluation</param>
 		/// <param name="message">The message to convert</param>
+		/// <param name="data">Result expression data</param>
 		/// <returns>The result expression</returns>
-		public virtual Expression GetExpression(EvaluationContext context, string message) => null;
+		public virtual Expression GetExpression(EvaluationContext context, string message, ref ExpressionData data) => null;
 
 		/// <summary>
 		/// Regular expression which represents the current <see cref="ExpressionPart"/>.

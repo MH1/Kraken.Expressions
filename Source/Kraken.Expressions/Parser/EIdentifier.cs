@@ -32,8 +32,9 @@ namespace Kraken.Expressions.Parser
 		/// </summary>
 		/// <param name="context">The context of evaluation</param>
 		/// <param name="message">The message to convert</param>
+		/// <param name="data">Result expression data</param>
 		/// <returns>The result expression</returns>
-		public override Expression GetExpression(EvaluationContext context, string message)
+		public override Expression GetExpression(EvaluationContext context, string message, ref ExpressionData data)
 		{
 			string valObj = message.ToLowerInvariant();
 			if (valObj == "true")
@@ -93,7 +94,8 @@ namespace Kraken.Expressions.Parser
 
 			if (string.IsNullOrEmpty(rest))
 			{
-				// TODO type
+				CastTo(t, ref data);
+				return null;
 			}
 			else
 			{
@@ -151,6 +153,16 @@ namespace Kraken.Expressions.Parser
 				throw new EvaluationException($"Unable to evaluate {rest} on type {t.FullName}");
 
 			return null;
+		}
+
+		/// <summary>
+		/// Result Type to cast.
+		/// </summary>
+		/// <param name="t">Result type</param>
+		/// <param name="data">Output data</param>
+		protected virtual void CastTo(Type t, ref ExpressionData data)
+		{
+			throw new EvaluationException("Unable to cast from identifier");
 		}
 	}
 }

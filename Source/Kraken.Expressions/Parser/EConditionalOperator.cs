@@ -12,6 +12,7 @@ namespace Kraken.Expressions.Parser
 		/// </summary>
 		public override Type[] ExpectedParts => new[]
 		{
+			typeof(ETypeCast),
 			typeof(ExpressionBlock),
 			typeof(EExpressionEnd),
 			typeof(EDateTime),
@@ -19,6 +20,7 @@ namespace Kraken.Expressions.Parser
 			typeof(EUnaryOperator),
 			typeof(EIdentifier),
 			typeof(EString),
+			typeof(EChar),
 		};
 
 		/// <summary>

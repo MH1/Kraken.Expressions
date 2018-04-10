@@ -61,7 +61,7 @@ namespace Kraken.Expressions.UnitTests
 		/// Expression with static property and enum in System namespace
 		/// </summary>
 		[Test]
-		public void EvaluateProperty5()
+		public void EvaluateStaticProperty1()
 		{
 			EvaluationContext context = new EvaluationContext();
 			DayOfWeek v = context.EvaluateExpression<DayOfWeek>("DateTime.Today.DayOfWeek");
@@ -74,11 +74,44 @@ namespace Kraken.Expressions.UnitTests
 		/// Expression with static property and enum in System namespace
 		/// </summary>
 		[Test]
-		public void EvaluateProperty6()
+		public void EvaluateStaticProperty2()
 		{
 			EvaluationContext context = new EvaluationContext();
 			bool v = context.EvaluateExpression<bool>("DateTime.Today.DayOfWeek == DayOfWeek.Friday");
 			Assert.AreEqual(DateTime.Today.DayOfWeek == DayOfWeek.Friday, v);
+		}
+
+		/// <summary>
+		/// Evaluate property with the base type - test 1
+		/// </summary>
+		[Test]
+		public void EvaluateBaseType1()
+		{
+			EvaluationContext context = new EvaluationContext();
+			bool v = context.EvaluateExpression<bool>("DateTime.Today.DayOfWeek == 5");
+			Assert.AreEqual((int)DateTime.Today.DayOfWeek == 5, v);
+		}
+
+		/// <summary>
+		/// Evaluate property with the base type - test 2
+		/// </summary>
+		[Test]
+		public void EvaluateBaseType2()
+		{
+			EvaluationContext context = new EvaluationContext();
+			int v = context.EvaluateExpression<int>("DateTime.Today.DayOfWeek + 1");
+			Assert.AreEqual((int)DateTime.Today.DayOfWeek + 1, v);
+		}
+
+		/// <summary>
+		/// Test type cast
+		/// </summary>
+		[Test]
+		public void EvaluateTypeCast1()
+		{
+			EvaluationContext context = new EvaluationContext();
+			short v = context.EvaluateExpression<short>("(short)DateTime.Today.DayOfWeek + 1");
+			Assert.AreEqual((short)DateTime.Today.DayOfWeek + 1, v);
 		}
 	}
 }

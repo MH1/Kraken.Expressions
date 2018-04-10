@@ -744,3 +744,12 @@ ulong;0;UInt64.MaxValue + 1
 ; concatenate strings
 string;abc123;"abc" + "123"
 string;abc123def;"abc" + "123" + "def"
+
+; concatenate strings with char
+string;abc;"ab" + 'c'
+string;abcdef;"ab" + 'c' + "def"
+string;abcdef;"ab" + 'c' + 'd' + "ef"
+string;abcd;'a' + "bc" + 'd'
+string;abcde;'a' + "bc" + 'd' + 'e'
+string;abcdef;'a' + "bc" + 'd' + "ef"
+string;abcdefg;'a' + "bc" + 'd' + 'e' + "fg"

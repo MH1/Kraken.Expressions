@@ -114,7 +114,7 @@ namespace Kraken.Expressions
 		/// </summary>
 		internal string[][] Priority = new[]
 		{
-			//new[] { "!", "NOT", "~"  }, // unary operators
+			//new[] { "!", "NOT", "~"  }, // unary operators - EUnaryOperator
 			new[] { "*", "/", "%", "MOD" },
 			new[] { "+", "-" },
 			new[] { "<<", ">>", "SRL", "SHR" },
@@ -126,7 +126,7 @@ namespace Kraken.Expressions
 			new[] { "&&", "AND" },
 			new[] { "||", "OR" },
 			new[] { "??" },
-			//new[] { "?", ":" }, // ?:
+			//new[] { "?", ":" }, // ?: - EConditionalOperator
 			// assignment
 		};
 
@@ -311,105 +311,55 @@ namespace Kraken.Expressions
 		/// <returns>The result type</returns>
 		public Type ConsolidateBinaryTypes(EvaluationContext context, Type t1, Type t2)
 		{
-			//return t1;
 			if (t1 == t2)
 				return t1;
+
+			if (t1.IsAssignableFrom(t2))
+				return t1;
+
+			if (t2.IsAssignableFrom(t1))
+				return t2;
+
+			if (
+#if NETSTANDARD1_6
+				t1.GetTypeInfo().IsEnum &&
+#else
+				t1.IsEnum &&
+#endif
+				(context.SignedIntTypes.Contains(t2)
+				|| context.UnsignedIntTypes.Contains(t2)))
+			{
+				return ConsolidateBinaryTypes(context, GetBaseTypeFromEnum(t1), t2);
+			}
+
+			if (
+#if NETSTANDARD1_6
+				t2.GetTypeInfo().IsEnum &&
+#else
+				t2.IsEnum &&
+#endif
+				(context.SignedIntTypes.Contains(t1)
+				|| context.UnsignedIntTypes.Contains(t1)))
+			{
+				return ConsolidateBinaryTypes(context, t1, GetBaseTypeFromEnum(t2));
+			}
 
 			if (context.SignedIntTypes.Contains(t1)
 				|| context.UnsignedIntTypes.Contains(t1)
 				|| context.FloatingPointTypes.Contains(t1))
 				return t1;
-			//if (signedInts.Contains(t1) && signedInts.Contains(t2))
-			//{
-			//	return t1;
-			//	//int idx = Math.Max(signedInts.IndexOf(t1), signedInts.IndexOf(t2));
-			//	//return signedInts[idx];
-			//}
-			//if (unsignedInts.Contains(t1) && unsignedInts.Contains(t2))
-			//{
-			//	return t1;
-			//	//int idx = Math.Max(unsignedInts.IndexOf(t1), unsignedInts.IndexOf(t2));
-			//	//return unsignedInts[idx];
-			//}
-			//if (real.Contains(t1) && real.Contains(t2))
-			//{
-			//	return t1;
-			//	//int idx = Math.Max(real.IndexOf(t1), real.IndexOf(t2));
-			//	//return real[idx];
-			//}
-			//if (real.Contains(t1))
-			//{
-			//	return t1;
-			//}
-			//if (real.Contains(t2))
-			//	return t2;
 
-			//if (t1 == typeof(int))
-			//{
-			//	if (t2 == typeof(long))
-			//		return typeof(long);
-			//	else if (t2 == typeof(decimal))
-			//		return typeof(decimal);
-			//	else if (t2 == typeof(double))
-			//		return typeof(double);
-			//	else if (t2 == typeof(float))
-			//		return typeof(decimal);
-			//	else if (t2 == typeof(System.Single))
-			//		return typeof(int);
-			//}
-			//else if (t1 == typeof(long))
-			//{
-			//	if (t2 == typeof(int))
-			//		return typeof(long);
-			//	else if (t2 == typeof(decimal))
-			//		return typeof(decimal);
-			//	else if (t2 == typeof(double))
-			//		return typeof(double);
-			//	else if (t2 == typeof(float))
-			//		return typeof(decimal);
-			//	else if (t2 == typeof(System.Single))
-			//		return typeof(long);
-			//}
-			//else if (t1 == typeof(decimal))
-			//{
-			//	if (t2 == typeof(int))
-			//		return typeof(decimal);
-			//	else if (t2 == typeof(long))
-			//		return typeof(decimal);
-			//	else if (t2 == typeof(double))
-			//		return typeof(double);
-			//	else if (t2 == typeof(float))
-			//		return typeof(decimal);
-			//	else if (t2 == typeof(System.Single))
-			//		return typeof(decimal);
-			//}
-			//else if (t1 == typeof(double))
-			//{
-			//	if (t2 == typeof(int))
-			//		return typeof(double);
-			//	else if (t2 == typeof(long))
-			//		return typeof(double);
-			//	else if (t2 == typeof(decimal))
-			//		return typeof(double);
-			//	else if (t2 == typeof(float))
-			//		return typeof(double);
-			//	else if (t2 == typeof(System.Single))
-			//		return typeof(double);
-			//}
-			//else if (t1 == typeof(System.Single))
-			//{
-			//	if (t2 == typeof(int))
-			//		return typeof(int);
-			//	else if (t2 == typeof(long))
-			//		return typeof(long);
-			//	else if (t2 == typeof(double))
-			//		return typeof(double);
-			//	else if (t2 == typeof(decimal))
-			//		return typeof(decimal);
-			//	else if (t2 == typeof(float))
-			//		return typeof(float);
-			//}
+			if ((t1 == typeof(string) && t2 == typeof(char)) ||
+				(t2 == typeof(string) && t1 == typeof(char)))
+				return typeof(string);
+
 			throw new EvaluationException($"Unknown binary operation with {t1.Name} and {t2.Name}");
+		}
+
+		private Type GetBaseTypeFromEnum(Type type)
+		{
+			FieldInfo mi = type.GetField("value__");
+			return mi.FieldType;
 		}
 
 		/// <summary>

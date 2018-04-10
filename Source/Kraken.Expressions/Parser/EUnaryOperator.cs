@@ -13,10 +13,12 @@ namespace Kraken.Expressions.Parser
 		/// </summary>
 		public override Type[] ExpectedParts => new[]
 		{
+			typeof(ETypeCast),
 			typeof(ExpressionBlock),
 			typeof(EConstant),
 			typeof(EIdentifier),
 			typeof(EString),
+			typeof(EChar),
 		};
 
 		/// <summary>

@@ -14,10 +14,12 @@ namespace Kraken.Expressions
 	public class Processing<TParserEntry> where TParserEntry : IExpressionPart
 	{
 		private static readonly MethodInfo StringConcat;
+		private static readonly MethodInfo CharToString;
 
 		static Processing()
 		{
 			StringConcat = typeof(string).GetMethod("Concat", new[] { typeof(string), typeof(string) });
+			CharToString = typeof(char).GetMethod("ToString", new Type[0]);
 		}
 
 		#region Single instance evaluation objects
@@ -148,39 +150,76 @@ namespace Kraken.Expressions
 				return false;
 			});
 
-			CompileSingleItem(context, expressionTree);
-			CompileMemberAccess(expressionTree);
+			bool changed;
+			do
+			{
+				changed = false;
 
-			bool changed = false;
-			changed |= CompileUnaryOperators(context, expressionTree);
-			changed |= CompileBinaryOperators(context, expressionTree);
-			changed |= CompileIIfOperators(context, expressionTree);
+				changed |= ReverseLoop(expressionTree, i =>
+				{
+					ProcessedItem item1 = expressionTree[i];
+					if (item1.ItemType != typeof(ETypeCast) || item1.TypeToCast == null)
+						return false;
+					if (i + 1 >= expressionTree.Count)
+						return false;
+					ProcessedItem item2 = expressionTree[i + 1];
+					if (item2 is ProcessedItem)
+					{
+						Expression expr = Expression.Convert(item2.Expression, item1.TypeToCast);
+						ProcessedItem newItem = ProcessedItem.Create(expr);
+						expressionTree.RemoveAt(i);
+						expressionTree.RemoveAt(i);
+						expressionTree.Insert(i, newItem);
+						return true;
+					}
+					return false;
+				});
 
-			if (expressionTree.Count == 1 && expressionTree[0].Expression != null)
-				return expressionTree[0].Expression;
+				changed |= CompileSingleItem(context, expressionTree);
+				changed |= CompileMemberAccess(expressionTree);
 
-			throw new EvaluationException("Expression compilation failed.");
+				changed |= CompileUnaryOperators(context, expressionTree);
+				changed |= CompileBinaryOperators(context, expressionTree);
+				changed |= CompileIIfOperators(context, expressionTree);
+
+				if (expressionTree.Count == 1 && expressionTree[0].Expression != null)
+					return expressionTree[0].Expression;
+
+				if (expressionTree.Count == 1 && expressionTree[0].TypeToCast != null)
+					return null;
+
+			} while (changed);
+
+			throw new EvaluationException($"Expression compilation failed.\n{string.Join("\n", expressionTree.Select(o => o.Content).ToArray())}");
 		}
 
 		/// <summary>
 		/// Compile the single item if it is possible to compile.
-		/// It concerns those <see cref="ExpressionPart"/>s items which returns expression in <seealso cref="ExpressionPart.GetExpression(EvaluationContext, string)"/>.
+		/// It concerns those <see cref="ExpressionPart"/>s items which returns expression in <seealso cref="ExpressionPart.GetExpression(EvaluationContext, string, ref ExpressionData)"/>.
 		/// </summary>
 		/// <param name="context">The context of evaluation.</param>
 		/// <param name="expressionTree">The expression tree.</param>
-		protected virtual void CompileSingleItem(EvaluationContext context, IList<ProcessedItem> expressionTree)
+		protected virtual bool CompileSingleItem(EvaluationContext context, IList<ProcessedItem> expressionTree)
 		{
 			// compile single item
-			ReverseLoop(expressionTree, i =>
+			return ReverseLoop(expressionTree, i =>
 			{
 				ProcessedItem item = expressionTree[i];
 				if (item.ItemType != null)
 				{
 					IExpressionPart obj = GetObject(item.ItemType);
-					Expression compiled = obj.GetExpression(context, item.Content);
+					ExpressionData data = new ExpressionData();
+					Expression compiled = obj.GetExpression(context, item.Content, ref data);
 					if (compiled != null)
 					{
 						ProcessedItem newItem = ProcessedItem.Create(compiled);
+						expressionTree.RemoveAt(i);
+						expressionTree.Insert(i, newItem);
+						return true;
+					}
+					else if (data.TypeToCast != null)
+					{
+						ProcessedItem newItem = ProcessedItem.CreateCast(data.TypeToCast);
 						expressionTree.RemoveAt(i);
 						expressionTree.Insert(i, newItem);
 						return true;
@@ -227,13 +266,17 @@ namespace Kraken.Expressions
 					Expression expr2 = expressionTree[i + 1].Expression;
 
 					Type resultType = context.ConsolidateBinaryTypes(context, expr1.Type, expr2.Type);
-					if (expr1.Type != resultType)
-						expr1 = Expression.Convert(expr1, resultType);
-					if (expr2.Type != resultType)
-						expr2 = Expression.Convert(expr2, resultType);
 
+					if ((expr1.Type == typeof(string) || expr1.Type == typeof(char)) && item.Content == "+")
+					{
+						resultType = typeof(string);
+					}
+					if (expr1.Type != resultType)
+						expr1 = ConvertExpression(expr1, resultType);
+					if (expr2.Type != resultType)
+						expr2 = ConvertExpression(expr2, resultType);
 					Expression expr;
-					if (expr1.Type == typeof(string) && item.Content == "+")
+					if ((expr1.Type == typeof(string) || expr2.Type == typeof(string)) && item.Content == "+")
 					{
 						expr = Expression.Call(StringConcat, new[] { expr1, expr2 });
 					}
@@ -253,6 +296,14 @@ namespace Kraken.Expressions
 				}
 				return false;
 			});
+
+		private Expression ConvertExpression(Expression expression, Type resultType)
+		{
+			if (expression.Type == typeof(char) && resultType == typeof(string))
+				return Expression.Call(expression, CharToString);
+			else
+				return Expression.Convert(expression, resultType);
+		}
 
 		/// <summary>
 		/// Compile the conditional operators.
@@ -284,16 +335,7 @@ namespace Kraken.Expressions
 					if (expr2.Type != resultType)
 						expr2 = Expression.Convert(expr2, resultType);
 
-					Expression expr;
-					if (expr1.Type == typeof(string) && item.Content == "+")
-					{
-						expr = Expression.Call(StringConcat, new[] { expr1, expr2 });
-					}
-					else
-					{
-						expr =
-							Expression.Condition(expr0, expr1, expr2);
-					}
+					Expression expr = Expression.Condition(expr0, expr1, expr2);
 					ProcessedItem newItem = ProcessedItem.Create(expr);
 					expressionTree.RemoveAt(i - 1);
 					expressionTree.RemoveAt(i - 1);
@@ -312,7 +354,7 @@ namespace Kraken.Expressions
 		/// <param name="context">The context of evaluation.</param>
 		/// <param name="expressionTree">The expression tree.</param>
 		/// <returns>True if it changed the expression tree.</returns>
-		protected virtual bool CompileUnaryOperators(EvaluationContext context, IList<ProcessedItem> expressionTree) => 
+		protected virtual bool CompileUnaryOperators(EvaluationContext context, IList<ProcessedItem> expressionTree) =>
 			TreeLoop(expressionTree, i =>
 			{
 				ProcessedItem item = expressionTree[i];

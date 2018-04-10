@@ -5,12 +5,12 @@ using System.Text.RegularExpressions;
 namespace Kraken.Expressions.Parser
 {
 	/// <summary>
-	/// The <see cref="ExpressionPart"/> implementation of the string constants.
+	/// The <see cref="ExpressionPart"/> implementation of the char constants.
 	/// </summary>
-	public class EString : ExpressionPart
+	public class EChar : ExpressionPart
 	{
 		/// <summary>
-		/// The list of <see cref="ExpressionPart"/> types which follows after the string constants.
+		/// The list of <see cref="ExpressionPart"/> types which follows after the char constants.
 		/// </summary>
 		public override Type[] ExpectedParts => new[]
 		{
@@ -20,12 +20,12 @@ namespace Kraken.Expressions.Parser
 		};
 
 		/// <summary>
-		/// The regular expression to match the string constant.
+		/// The regular expression to match the char constant.
 		/// </summary>
-		public override string Regexp => Constants.REGEX_String;
+		public override string Regexp => Constants.REGEX_Char;
 
 		/// <summary>
-		/// Method to convert the string constant from string to <see cref="Expression"/>.
+		/// Method to convert the char constant from string to <see cref="Expression"/>.
 		/// </summary>
 		/// <param name="context">The context of evaluation</param>
 		/// <param name="message">The message to convert</param>
@@ -33,11 +33,11 @@ namespace Kraken.Expressions.Parser
 		/// <returns>The result expression</returns>
 		public override Expression GetExpression(EvaluationContext context, string message, ref ExpressionData data)
 		{
-			// replace doubled quotes
-			string value = message.Replace(@"\""", "\"");
+			// replace escaped quotes
+			string value = message.Replace(@"\'", "\'");
 			// remove quotes at the beginning and at the end of string
-			value = Regex.Replace(value, @"^""", "");
-			value = Regex.Replace(value, @"""$", "");
+			value = Regex.Replace(value, @"^'", "");
+			value = Regex.Replace(value, @"'$", "");
 			// replace special chars
 			value = value.Replace(@"\a", "\a");
 			value = value.Replace(@"\b", "\b");
@@ -49,7 +49,7 @@ namespace Kraken.Expressions.Parser
 			// replace characters escaped with backslash
 			value = Regex.Replace(value, @"\\(.)", "$1");
 			// return result string constant as expression
-			return Expression.Constant(value, typeof(string));
+			return Expression.Constant(value?[0], typeof(char));
 		}
 	}
 }
