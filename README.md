@@ -65,5 +65,5 @@ object result5 = expression2.Invoke(2, 6);
 - String concatenation +
 - Property evaluation
 - Static method call
-- ...etc. See also examples in the [test file](https://github.com/MH1/Kraken.Expressions/blob/master/Source/Kraken.Expressions.UnitTests/Batch/Default.txt)
+- ...etc. See also examples in the [test file](https://github.com/MH1/Kraken.Expressions/blob/master/Source/Kraken.Expressions.Tests/Batch/Default.txt)
  in format: return type;return value;expression to test
