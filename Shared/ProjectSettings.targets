@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <Product>Kraken.Expressions</Product>
+    <ProductName>Kraken.Expressions</ProductName>
+    <PackageId>Kraken.Expressions</PackageId>
     <VersionPrefix>1.0.1</VersionPrefix>
     <Version>1.0.1.0</Version>
     <TargetFrameworks>netstandard2.0;netstandard1.6;net47;net46;net45</TargetFrameworks>
