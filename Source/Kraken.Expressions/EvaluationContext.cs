@@ -283,7 +283,7 @@ namespace Kraken.Expressions
 			Type t = par?.GetType();
 			if (t != null)
 			{
-#if FEATURE_TYPE_INFO
+#if NETSTANDARD
 				foreach (PropertyInfo prop in t.GetTypeInfo().GetProperties())
 #else
 				foreach (PropertyInfo prop in t.GetProperties())

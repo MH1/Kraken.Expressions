@@ -7,7 +7,7 @@ The expression compiler and evaluation library.
 
 ### Supported platforms
 - **.NET Standard 1.6** or later
-- **.NET Framework 3.5** or later
+- **.NET Framework 4.5** or later
 
 ### Download and install
 Nuget package [Kraken.Expressions](https://www.nuget.org/packages/Kraken.Expressions/)

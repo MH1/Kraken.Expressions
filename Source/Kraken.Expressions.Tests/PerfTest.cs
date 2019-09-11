@@ -5,11 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
-using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 using System.Linq.Expressions;
 using System.Diagnostics;
 
-namespace Kraken.Expressions.UnitTests
+namespace Kraken.Expressions.Tests
 {
 	/// <summary>
 	/// Performance tests.

@@ -1,9 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 
-using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
-
-namespace Kraken.Expressions.UnitTests
+namespace Kraken.Expressions.Tests
 {
 	/// <summary>
 	/// Test properties which cannot be included in unit test.

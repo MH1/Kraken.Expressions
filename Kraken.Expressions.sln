@@ -1,11 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.12
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kraken.Expressions", "Source\Kraken.Expressions\Kraken.Expressions.csproj", "{581B7E12-D065-410C-8D5A-9CE5AB6B6C6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kraken.Expressions.UnitTests", "Source\Kraken.Expressions.UnitTests\Kraken.Expressions.UnitTests.csproj", "{EFFE5A34-AF21-40EB-B054-A1208262B7C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kraken.Expressions.Tests", "Source\Kraken.Expressions.Tests\Kraken.Expressions.Tests.csproj", "{EFFE5A34-AF21-40EB-B054-A1208262B7C8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{B8606C16-7615-4E89-8A37-1A8A0D9C8C0C}"
+	ProjectSection(SolutionItems) = preProject
+		Shared\Environment.targets = Shared\Environment.targets
+		Shared\ProjectSettings.targets = Shared\ProjectSettings.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -115,7 +115,7 @@ namespace Kraken.Expressions.Parser
 						}
 					}
 
-#if FEATURE_TYPE_INFO
+#if NETSTANDARD
 					t2 = t.GetTypeInfo().GetProperty(m)?.PropertyType;
 #else
 					t2 = t.GetProperty(m)?.PropertyType;
@@ -125,7 +125,7 @@ namespace Kraken.Expressions.Parser
 						throw new EvaluationException($"Unable to find property {m} on type {t.Name}.");
 					}
 
-#if FEATURE_TYPE_INFO
+#if NETSTANDARD
 					if (exp.Type.GetTypeInfo().IsAssignableFrom((Type)null))
 #else
 					if (exp.Type.IsAssignableFrom((Type)null))

@@ -7,14 +7,11 @@ using System.Reflection;
 using NUnit.Framework;
 using Kraken.Expressions;
 
-using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
-
-namespace Kraken.Expressions.UnitTests
+namespace Kraken.Expressions.Tests
 {
 	/// <summary>
 	/// Unit tests.
 	/// </summary>
-	[TestFixture]
 	public class BatchTest
 	{
 		/// <summary>
@@ -39,7 +36,7 @@ namespace Kraken.Expressions.UnitTests
 		[Test]
 		public void TestAllBatches()
 		{
-			string dir = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+			string dir = GetCurrentDirectory();
 			foreach (string file in Directory.GetFiles(Path.Combine(dir, "Batch"), "*.txt"))
 			{
 				TestFile(file);
@@ -48,7 +45,7 @@ namespace Kraken.Expressions.UnitTests
 
 		private static void TestSingleFile(string file)
 		{
-			string dir = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+			string dir = GetCurrentDirectory();
 			string filePath = Path.Combine(dir, "Batch", file);
 			if (File.Exists(filePath))
 				TestFile(filePath);
@@ -88,7 +85,7 @@ namespace Kraken.Expressions.UnitTests
 			}
 		}
 
-		private static Dictionary<string, Type> Exceptions = new Dictionary<string, Type>
+		private static readonly Dictionary<string, Type> Exceptions = new Dictionary<string, Type>
 		{
 			{ "DivideByZeroException", typeof(DivideByZeroException) },
 			{ "OverflowException", typeof(OverflowException) },
@@ -203,6 +200,15 @@ namespace Kraken.Expressions.UnitTests
 						return Single.Parse(value, CultureInfo.InvariantCulture);
 					throw new InvalidOperationException("Undefined type");
 			}
+		}
+
+		private static string GetCurrentDirectory()
+		{
+#if NETCORE
+			return Directory.GetCurrentDirectory();
+#else
+			return AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+#endif
 		}
 	}
 }

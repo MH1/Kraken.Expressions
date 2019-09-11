@@ -1,0 +1,55 @@
+﻿<Project>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="
+    '$(TargetFramework)'=='netstandard1.0' OR
+    '$(TargetFramework)'=='netstandard1.1' OR
+    '$(TargetFramework)'=='netstandard1.2' OR
+    '$(TargetFramework)'=='netstandard1.3' OR
+    '$(TargetFramework)'=='netstandard1.4' OR
+    '$(TargetFramework)'=='netstandard1.5' OR
+    '$(TargetFramework)'=='netstandard1.6' OR
+    '$(TargetFramework)'=='netstandard2.0'">
+    <DefineConstants>NETSTANDARD</DefineConstants>
+    <NetStandard>1</NetStandard>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="
+    '$(TargetFramework)'=='netcoreapp1.0' OR
+    '$(TargetFramework)'=='netcoreapp1.1' OR
+    '$(TargetFramework)'=='netcoreapp2.0' OR
+    '$(TargetFramework)'=='netcoreapp2.1' OR
+    '$(TargetFramework)'=='netcoreapp2.2'">
+    <DefineConstants>NETCORE</DefineConstants>
+    <NetCore>1</NetCore>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="
+    '$(TargetFramework)'=='net35' OR
+    '$(TargetFramework)'=='net40' OR
+    '$(TargetFramework)'=='net403' OR
+    '$(TargetFramework)'=='net45' OR
+    '$(TargetFramework)'=='net451' OR
+    '$(TargetFramework)'=='net452' OR
+    '$(TargetFramework)'=='net46' OR
+    '$(TargetFramework)'=='net461' OR
+    '$(TargetFramework)'=='net462' OR
+    '$(TargetFramework)'=='net47' OR
+    '$(TargetFramework)'=='net471' OR
+    '$(TargetFramework)'=='net472'">
+    <DefineConstants>NETFRAMEWORK</DefineConstants>
+    <NetFramework>1</NetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="
+    '$(Configuration)'=='Debug' AND
+    '$(Platform)'=='AnyCPU' AND
+    ('$(NetStandard)'=='1' OR '$(NetCore)'=='1')">
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <TreatSpecificWarningsAsErrors></TreatSpecificWarningsAsErrors>
+    <NoWarn>1701;1702;1705</NoWarn>
+  </PropertyGroup>
+
+</Project>

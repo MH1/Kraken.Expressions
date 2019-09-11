@@ -1,0 +1,24 @@
+﻿<Project>
+
+  <PropertyGroup>
+    <Product>Kraken.Expressions</Product>
+    <VersionPrefix>1.0.1</VersionPrefix>
+    <Version>1.0.1.0</Version>
+    <TargetFrameworks>netstandard2.0;netstandard1.6;net47;net46;net45</TargetFrameworks>
+    <!--TargetFrameworks>netstandard2.0;netstandard1.6;net472;net471;net47;net462;net461;net46;net452;net451;net45</TargetFrameworks-->
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!--NetStandardImplicitPackageVersion Condition="'$(TargetFramework)'=='netstandard1.6'">1.6.1</NetStandardImplicitPackageVersion-->
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <Company>Martin Hloušek</Company>
+    <Authors>Martin Hloušek</Authors>
+    <Description>This library enables you to convert string into lambda expression and evaluate it.</Description>
+    <Copyright>Copyright © 2017 Martin Hloušek</Copyright>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+
+  <Import Project="$(SolutionDir)Shared\Environment.targets" />
+  
+</Project>

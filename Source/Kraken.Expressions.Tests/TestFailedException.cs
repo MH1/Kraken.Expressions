@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace Kraken.Expressions.UnitTests
+namespace Kraken.Expressions.Tests
 {
 	/// <summary>
 	/// Represents errors that occur during unit tests.
